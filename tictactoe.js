@@ -1,43 +1,32 @@
 var spots = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var turn = 1;
 
 function insert(id) {
-  var computer;
-  if (spots[id] != "X" && spots[id] != "O") {
-    document.getElementById(id).innerHTML = "X";
-    spots[id] = "X";
-    if (checkAll("X") == 1) {
-      alert("Player 1 has won!");
-    } else {
-      insertComputer();
-      if (checkAll("O") == 1) {
-        alert("Player 2 has won!");
-      }
-    }
-  } else {
-      alert("This spot is already taken!");
-  }
-}
-
-function insertComputer() {
-  var found;
-  for (var i = 0; i <= spots.length; i++) {
-    if (spots[i] == 0) { 
-      while (true) {
-	var id = randomNumber();
-      	if (spots[id] != "X" && spots[id] != "O") {
-	  document.getElementById(id).innerHTML = "O";
-	  spots[id] = "O";
-          found = true;
-          break;
-	} 
-      } break;
-    }
-  } if (!found) {
-      alert("No empty spots left");
-  }
-}
-function randomNumber() {
-  return Math.round(Math.random() * 8);
+	if (turn == 1) {
+		if (spots[id] != "X" && spots[id] != "O") {
+			document.getElementById(id).innerHTML = "X";
+			spots[id] = "X";
+			turn = 2;
+			if (checkAll("X") == 1) {
+				alert("Player 1 has won!");
+				turn = 0;
+			}
+		} else {
+			alert("This spot is already taken!");
+		} 
+	} else if (turn == 2) {
+		if (spots[id] != "X" && spots[id] != "O") {
+			document.getElementById(id).innerHTML = "O";
+			spots[id] = "O";
+			turn = 1;
+			if (checkAll("O") == 1) {
+				alert("Player 2 has won!");
+				turn = 0;
+			}
+		} else {
+			alert("This spot is already taken!");
+		} 
+	}
 }
 
 function checkWinning(char, a, b, c, d, e) {
