@@ -29,6 +29,8 @@ function insert(id) {
 	}
 }
 
+window.insert = insert;
+
 function checkWinning(char, a, b, c, d, e) {
   if (spots[a] == char && spots[b] == char && spots[c] == char && spots[d] == char && spots[e] == char) {
     return true;
